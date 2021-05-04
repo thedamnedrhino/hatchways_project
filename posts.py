@@ -26,5 +26,5 @@ handler = PostHandler(retriever)
 if config.CACHE:
     requests_cache.install_cache('posts', backend='sqlite', expire_after=180)
 
-def get_posts(tags, sortfield, ascending):
+def get_posts(tags, sortfield='id', ascending=True):
     return handler.get_posts(tags, sortfield, ascending)
