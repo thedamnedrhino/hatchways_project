@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, make_response
+import pymongo
 import posts, config
 
 app = Flask(__name__)
@@ -7,6 +8,15 @@ HTTP_SUCCESS = 200
 HTTP_ERROR = 400
 
 @app.route('/')
+def mongo():
+    client = pymongo.MongoClient()
+    db = client.test_database
+    collection = db.test_collection
+    testitem = {'key0': 'key1'}
+    testid = collection.insert_one(testitem)
+    print(testid)
+    return str(testid.inserted_id)
+
 def hello_world():
     return 'Hello, World!, here is your passed parameters: {}'.format(request.args)
 
